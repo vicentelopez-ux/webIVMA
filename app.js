@@ -1,16 +1,29 @@
-//  Para encontrar librerias entra a https://www.npmjs.com/
-import express from 'express'
+const express = require('express');
 
-const app = express()
+const app = express(); // App hereda todo lo que contenga express
 
-app.get('/', (req, res) => { // Un solo slash es la pagina principal de la web
-  res.send('Hello World !!!! @@@@@@')
-})
+const PORT = 3000;
 
-app.get('/contacto', (req, res) => { // Esto se llaman rutas
-    res.send('Pagina de contacto!')
-})
+// RUTAS
 
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000')
-})
+app.get('/', (req, res) => {
+  res.send('<h1>INDEX</h1>');
+}); 
+
+app.get('/servicios', (req, res) => {
+  res.send('<h1>SERVICIOS</h1>');
+}); 
+
+app.get('/nosotros', (req, res) => {
+  res.send('<h1>NOSOTROS</h1>');
+}); 
+
+app.get('/contacto', (req, res) => {
+  res.send('<h1>CONTACTO</h1>');
+}); 
+
+// Colocamos el app en el puerto 3000
+// Este bloque de codigo siempre va al final del codigo
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto http://localhost:${PORT}`);
+});
