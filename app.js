@@ -15,6 +15,12 @@ console.log(DB_USER);
 // CONFIGURAR EJS
 app.set('view engine', 'ejs');
 
+// MIDDLEWARES
+  //    POST        Viaja       BACK
+  // Solicitud -> validacion -> Proceso
+// Prmite leer informacione enviada por formularios html
+app.use(express.urlencoded({ extended:true }));
+
 // ARCHIVOS ESTATICOS
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -35,6 +41,20 @@ app.get('/contacto', (req, res) => {
   res.render('contacto');
 }); 
 
+app.post('/contacto', (req, res) => {
+  // La informacion del formulario viaja encapsulada, po lo cual ocupamos req.body, body = [nombre, correo, asunto, mensaje]
+  // Siempre el arreglo se llama body
+  // tenemos que recomponer el body para sacar la informacion
+  const {nombre, correo, asunto, mensaje} = req.body;
+
+  console.log('Nombre: ', nombre);
+  console.log('Correo: ', correo);
+  console.log('Asunto: ', asunto);
+  console.log('Mensaje: ', mensaje);
+
+  res.render('contacto')
+  
+});
 // Colocamos el app en el puerto 3000
 // Este bloque de codigo siempre va al final del codigo
 app.listen(PORT, () => {
